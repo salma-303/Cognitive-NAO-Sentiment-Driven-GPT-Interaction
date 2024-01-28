@@ -2,7 +2,7 @@ from transformers import pipeline
 import speech_recognition as sr
 from textblob import TextBlob
 import openai 
-openai.api_key = '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'
+openai.api_key = 'YOUR API KEY'
 
 # Initialize recognizer
 
