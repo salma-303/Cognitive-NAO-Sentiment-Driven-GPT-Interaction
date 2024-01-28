@@ -6,24 +6,39 @@ openai.api_key = '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'
 
 # Initialize recognizer
 
-# recognizer = sr.Recognizer()
-# audio_file_path = "audio.wav"
+recognizer = sr.Recognizer()
+audio_file_path = "audio.wav"
 
-# # Load audio file
-# with sr.AudioFile(audio_file_path) as source:
-#     audio_data = recognizer.record(source)
+# Load audio file
+with sr.AudioFile(audio_file_path) as source:
+    audio_data = recognizer.record(source)
 
-# # Perform speech recognition
-# text = recognizer.recognize_google(audio_data)
-# print("Text from audio:", text)
+# Perform speech recognition
+text = recognizer.recognize_google(audio_data)
+print("Text from audio:", text)
 
-text = "The environment is: You have a wall in front of you, an obstacle 2 steps to you're left "
+
+def analyze_sentiment(text):
+
+    # Perform sentiment analysis using TextBlob
+    blob = TextBlob(text)
+    sentiment_score = blob.sentiment.polarity
+    print("Sentiment Score:", sentiment_score)
+
+    # Classify sentiment
+    if sentiment_score > 0:
+        print("Sentiment: Positive")
+    elif sentiment_score < 0:
+        print("Sentiment: Negative")
+    else:
+        print("Sentiment: Neutral")
+
+
+# Example usage
+analyze_sentiment(text)
 
 messages = [ {"role": "system", "content":  
-              """you are a Humonoid Nao Robot, I will explain the environment around you, you have to take actions, to navigate the environments, 
-                your actions are: move_forward, rotate. move _right, move_left
-                reply only with the actions
-                and the number of steps for each action expect rotate"""} ] 
+              "You are a NAO robot, exist at colleage of Artificial Intelligence in Alamain city, developed by Ai students.Answer in 2 sentences."} ] 
 while True: 
     message = (f"User :{text} ")
     if message: 
